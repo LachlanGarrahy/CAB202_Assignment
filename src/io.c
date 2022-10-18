@@ -38,10 +38,10 @@ void display_off(void){
 }
 
 void display_hex(uint8_t digit){
+    timer_init();
     display_hex_finder(digit);
 }
 
 void display_raw(uint8_t left, uint8_t right){
-    timer_init();
     set_digits(left, right);
 }

@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "io.h"
 #include "buttons.h"
-#include <avr/io.h>
-#include <avr/interrupt.h>
 
 uint8_t counter = 0;
 

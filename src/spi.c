@@ -1,6 +1,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#include "io.h"
+
 void spi_init(void){
     PORTMUX.SPIROUTEA = PORTMUX_SPI0_ALT1_gc;
 
@@ -29,5 +31,5 @@ void spi_off(void){
 ISR(SPI0_INT_vect){
     PORTA.OUTCLR = PIN1_bm;
     PORTA.OUTSET = PIN1_bm;
-    volatile uint8_t dummy = SPI0.DATA;
+    SPI0.INTFLAGS = SPI_IF_bm;
 }

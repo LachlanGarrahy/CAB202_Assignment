@@ -4,16 +4,15 @@
 #include "spi.h"
 #include "io.h"
 
-uint8_t left_digit;
-uint8_t right_digit;
+uint8_t left_digit = 0b10000000;
+uint8_t right_digit = 0b00000000;
 
 void timer_init() {
     cli();
-    TCA0.SINGLE.INTCTRL = TCA_SINGLE_CMP0_bm;
-    TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV1_gc;
-    TCA0.SINGLE.CTRLB = TCA_SINGLE_CMP0_bm | TCA_SINGLE_WGMODE_SINGLESLOPE_gc;
-    TCA0.SINGLE.PER = 33333;
-    TCA0.SINGLE.CTRLA |= TCA_SINGLE_ENABLE_bm;
+    TCB0.CTRLB = TCB_CNTMODE_INT_gc;    // Configure TCB0 in periodic interrupt mode
+    TCB0.CCMP = 3333;                   // Set interval for 1ms (3333 clocks @ 3.3 MHz)
+    TCB0.INTCTRL = TCB_CAPT_bm;         // CAPT interrupt enable
+    TCB0.CTRLA = TCB_ENABLE_bm;         // Enable
     sei(); 
 }
 
@@ -22,16 +21,16 @@ void set_digits(uint8_t left, uint8_t right){
     right_digit = right;
 }
 
-ISR(TCA0_CMP0_vect) {
+ISR(TCB0_INT_vect) {
     static uint8_t digit = 0;
 
     if (digit){
-        spi_write(left_digit);
-    }else{
         spi_write(right_digit);
+    }else{
+        spi_write(left_digit);
     }
 
     digit = !digit;
 
-    TCA0.SINGLE.INTFLAGS = TCA_SINGLE_CMP0_bm;        // Acknowledge interrupt
+    TCB0.INTFLAGS = TCB_CAPT_bm;        // Acknowledge interrupt
 }
