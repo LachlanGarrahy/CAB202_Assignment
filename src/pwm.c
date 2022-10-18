@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-void pwm_init(){
+void brightness_init(){
     PORTB.DIRSET = PIN1_bm;
     TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV1_gc;
     TCA0.SINGLE.CTRLB = TCA_SINGLE_CMP1_bm | TCA_SINGLE_WGMODE_SINGLESLOPE_gc;

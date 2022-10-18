@@ -14,6 +14,7 @@ int main(void) {
     stdio_init();
     display_init();
     buttons_init();
+    pwm_init();
 
     while(1){
 

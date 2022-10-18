@@ -3,6 +3,7 @@
 #include "spi.h"
 #include "timer.h"
 #include "digit_finder.h"
+#include "pwm.h"
 
 static int stdio_putchar(char c, FILE *stream);
 static int stdio_getchar(FILE *stream);
@@ -27,6 +28,10 @@ void stdio_init(void) {
 
 void display_init(void){
     spi_init();
+}
+
+void pwm_init(void){
+    brightness_init();
 }
 
 void display_on(void){
