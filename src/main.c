@@ -2,6 +2,8 @@
 #include "io.h"
 #include "buttons.h"
 
+#include "buzzer.h"
+
 uint8_t counter = 0;
 
 uint8_t pb = 0xFF;
@@ -10,10 +12,12 @@ uint8_t pb_changed, pb_falling;
 
 int main(void) {
     stdio_init();
+    buzzer_init();
     display_init();
     buttons_init();
     pwm_init();
     adc_init();
+   
 
     while(1){
 
@@ -32,7 +36,9 @@ int main(void) {
                 counter -= 1;
             }
         }
-        
+
+        sound_duty_cycle_adjust(1667);
+
         display_hex(counter);
     }
 }
