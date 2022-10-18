@@ -46,7 +46,7 @@ uint8_t find_hex_digit(uint8_t digit){
         return 0b01100000;
     }else if (digit == 14){
         return 0b00010100;
-    }else if (digit == 15){
+    }else{
         return 0b00010110;
     }
 }

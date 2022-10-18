@@ -3,6 +3,7 @@
 void stdio_init();
 
 void pwm_init();
+void adc_init();
 
 void display_init();                            // Initialise display
 void display_on();                              // Turn on display

@@ -3,6 +3,7 @@
 #include "spi.h"
 #include "timer.h"
 #include "digit_finder.h"
+#include "adc.h"
 #include "pwm.h"
 
 static int stdio_putchar(char c, FILE *stream);
@@ -30,9 +31,14 @@ void display_init(void){
     spi_init();
 }
 
-void pwm_init(void){
-    brightness_init();
+void adc_init(void){
+    adc_adc_init();
 }
+
+void pwm_init(void){
+    pwm_pwm_init();
+}
+
 
 void display_on(void){
     spi_on();
@@ -43,10 +49,10 @@ void display_off(void){
 }
 
 void display_hex(uint8_t digit){
+    timer_init();
     display_hex_finder(digit);
 }
 
 void display_raw(uint8_t left, uint8_t right){
-    timer_init();
     set_digits(left, right);
 }

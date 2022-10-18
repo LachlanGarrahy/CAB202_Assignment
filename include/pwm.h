@@ -1,4 +1,4 @@
 #include <stdint.h>
 
-void brightness_init();
-void brightness_adjust(uint8_t input);
+void pwm_pwm_init();
+void brightness_adjust(uint16_t input);

@@ -14,7 +14,8 @@ int main(void) {
     stdio_init();
     display_init();
     buttons_init();
-    //pwm_init();
+    pwm_init();
+    adc_init();
 
     while(1){
 
@@ -33,6 +34,7 @@ int main(void) {
                 counter -= 1;
             }
         }
+        
         display_hex(counter);
     }
 }

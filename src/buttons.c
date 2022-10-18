@@ -1,6 +1,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#include "io.h"
+
 volatile uint8_t pb_state = 0xFF;
 volatile uint8_t pb_debounced = 0xFF;
 
