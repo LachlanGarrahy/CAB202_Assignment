@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "io.h"
-#include "uart.h"
 
 uint8_t find_hex_digit(uint8_t);
 

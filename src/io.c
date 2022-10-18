@@ -2,6 +2,7 @@
 #include "uart.h"
 #include "spi.h"
 #include "timer.h"
+#include "digit_finder.h"
 
 static int stdio_putchar(char c, FILE *stream);
 static int stdio_getchar(FILE *stream);
