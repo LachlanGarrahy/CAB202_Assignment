@@ -14,7 +14,7 @@ void buzz_init(){
     cli(); // Disable interrupts globally
     TCA0.SINGLE.INTCTRL = TCA_SINGLE_CMP0_bm;
     TCA0.SINGLE.CTRLB = TCA_SPLIT_LCMP0_bm;
-    TCA0.SINGLE.CMP0 = 786;
+    TCA0.SINGLE.CMP0 = 1666;
     sei(); // Enable interrupts globally
 }
 
@@ -24,7 +24,7 @@ void sound_duty_cycle_adjust(uint16_t input){
 }
 
 ISR(TCA0_CMP0_vect) {
-    printf("fuck");
+    //PORTB.OUTTGL = PIN0_bm;
 
     TCA0.SINGLE.INTFLAGS = TCA_SINGLE_CMP0_bm;
 }
