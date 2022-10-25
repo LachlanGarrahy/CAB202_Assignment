@@ -5,6 +5,7 @@
 #include "digit_finder.h"
 #include "adc.h"
 #include "pwm.h"
+#include "buzzer.h"
 
 static int stdio_putchar(char c, FILE *stream);
 static int stdio_getchar(FILE *stream);
@@ -33,6 +34,10 @@ void display_init(void){
 
 void adc_init(void){
     adc_adc_init();
+}
+
+void buzzer_init(void){
+    buzz_init();
 }
 
 void pwm_init(void){

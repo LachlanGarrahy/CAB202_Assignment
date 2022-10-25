@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "io.h"
 #include "buttons.h"
+#include "sequence.h"
+#include "decoder.h"
+
+// uint8_t lsbyte(uint32_t);
+// uint8_t lsbit(uint8_t);
+// uint8_t DecodeToBinary(uint8_t);
+
 
 uint8_t counter = 0;
 
@@ -10,10 +17,21 @@ uint8_t pb_changed, pb_falling;
 
 int main(void) {
     stdio_init();
+    //buzzer_init();
     display_init();
-    buttons_init();
+    //buttons_init();
     pwm_init();
     adc_init();
+
+    uint8_t DECODED[3];
+
+    decode_decrypt(TEST_BASE64, DECODED);
+
+    for (uint8_t i = 0; i < 3; i++)
+    {
+        printf("%X", DECODED[i]);
+    }
+    
 
     while(1){
 
@@ -32,7 +50,43 @@ int main(void) {
                 counter -= 1;
             }
         }
-        
+
+        //sound_duty_cycle_adjust(1667);
+
         display_hex(counter);
     }
 }
+
+uint8_t msbyte(uint32_t bytes){
+    bytes >>= 3;
+    return bytes;
+}
+
+uint8_t mbyte(uint32_t bytes){
+    bytes <<= 3;
+    bytes >>= 3;
+    return bytes;
+}
+
+// uint8_t lsbyte(uint32_t bytes){
+//     bytes <<= 3;
+//     bytes >>= 3;
+//     return bytes;
+// }
+
+// uint8_t lsbit(uint8_t byte){
+//     byte &= 0b00000001;
+//     return byte;
+// }
+
+// uint8_t DecodeToBinary(uint8_t byte){
+//     uint8_t number;
+//     if (byte >= 'a' && byte <= 'z'){
+//         number = byte - 'a' + 26;
+//     }else if (byte >= 'A' && byte <= 'Z'){
+//         number = byte - 'A' + 0;
+//     }else if (byte >= '0' && byte <= '9'){
+//         number =  byte - '0' + 52;
+//     }
+//     return number;
+// }
