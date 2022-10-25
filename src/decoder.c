@@ -72,6 +72,10 @@ uint8_t DecodeToBinary(uint8_t byte){
         number = byte - 'A' + 0;
     }else if (byte >= '0' && byte <= '9'){
         number =  byte - '0' + 52;
+    }else if (byte == '+'){
+        number = 62;
+    }else if(byte == '/'){
+        number = 63;
     }
     return number;
 }

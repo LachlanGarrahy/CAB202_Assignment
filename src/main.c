@@ -23,14 +23,11 @@ int main(void) {
     pwm_init();
     adc_init();
 
-    uint8_t DECODED[3];
+    uint16_t sequence_counter = 0;
 
-    decode_decrypt(TEST_BASE64, DECODED);
-
-    for (uint8_t i = 0; i < 3; i++)
-    {
-        printf("%X", DECODED[i]);
-    }
+    printf("%X, %X, %X, %X\n", SEQUENCE[sequence_counter], SEQUENCE[sequence_counter+1], SEQUENCE[sequence_counter+2], SEQUENCE[sequence_counter+3]); 
+    sequence_counter += 4;    
+    printf("%X, %X, %X, %X\n", SEQUENCE[sequence_counter], SEQUENCE[sequence_counter+1], SEQUENCE[sequence_counter+2], SEQUENCE[sequence_counter+3]); 
     
 
     while(1){
