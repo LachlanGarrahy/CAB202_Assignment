@@ -4,12 +4,15 @@
 #include "spi.h"
 #include "io.h"
 
+// masks for left and right digits
 uint8_t left_digit = 0b10000000;
 uint8_t right_digit = 0b00000000;
 
+// volatile variables to allow main to access the variables
 volatile uint8_t pb_state = 0xFF;
 volatile uint8_t pb_debounced = 0xFF;
 
+// method to initialise the timer for button debouncing and swithcing the displays
 void timer_init() {
     PORTA.PIN4CTRL = PORT_PULLUPEN_bm;
     PORTA.PIN5CTRL = PORT_PULLUPEN_bm;
@@ -24,11 +27,13 @@ void timer_init() {
     sei(); 
 }
 
+// method to set the 2 digits to be displayed
 void set_digits(uint8_t left, uint8_t right){
     left_digit = left;
     right_digit = right;
 }
 
+// method to flip between the screens by fliping the value of digit
 void flip_screens(){
     static uint8_t digit = 0;
 
@@ -41,6 +46,7 @@ void flip_screens(){
     digit = !digit;
 }
 
+// method to check the state of the buttons
 void check_buttons(){
     static uint8_t count0 = 0;
     static uint8_t count1 = 0;
@@ -55,6 +61,7 @@ void check_buttons(){
     pb_state = pb_debounced;
 }
 
+// Acknowledge the interrupt and flip between screens and check button status
 ISR(TCB0_INT_vect) {
     flip_screens();
     check_buttons();

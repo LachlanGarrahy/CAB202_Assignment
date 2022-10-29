@@ -3,18 +3,23 @@
 
 uint8_t find_hex_digit(uint8_t);
 
+// method to call the display function with the values parsed from display hex
 void display_hex_finder(uint8_t digit){
     uint8_t left = 0b10000000;
     uint8_t right = 0;
 
+    // shifts the 8 bit byte to get only the high nibble and check the digit
     uint8_t left_digit = find_hex_digit(digit >> 4) | left;
 
+    // shifts the 8 bit byte to get only the low nibble and check the digit
     uint8_t right_digit = digit << 4;
     right_digit = find_hex_digit(right_digit >> 4) | right;
 
+    // calls the method to diplay to the 7 segment displays
     display_raw(left_digit, right_digit);
 }
 
+// method to return the value to be parsed to the display method
 uint8_t find_hex_digit(uint8_t digit){
     if (digit == 0){
         return 0b00001000;

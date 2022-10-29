@@ -3,6 +3,7 @@
 
 #include "io.h"
 
+// method to initialise spi interrupts
 void spi_init(void){
     PORTMUX.SPIROUTEA = PORTMUX_SPI0_ALT1_gc;
 
@@ -16,18 +17,12 @@ void spi_init(void){
     sei();
 }
 
+// method to write to the spi data bit
 void spi_write(uint8_t b){
     SPI0.DATA = b;
 }
 
-void spi_on(void){
-    
-}
-
-void spi_off(void){
-
-}
-
+// acknoledge the spi interrupt
 ISR(SPI0_INT_vect){
     PORTA.OUTCLR = PIN1_bm;
     PORTA.OUTSET = PIN1_bm;
