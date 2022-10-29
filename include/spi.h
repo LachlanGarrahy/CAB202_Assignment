@@ -1,6 +1,5 @@
 #include <stdint.h>
-
+//method to initiliase spi
 void spi_init();
+//method to write to the spi
 void spi_write(uint8_t b);
-void spi_on();
-void spi_off();

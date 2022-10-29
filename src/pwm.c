@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-
+// method to initialise pwm
 void pwm_pwm_init(){
     PORTB.DIRSET = PIN1_bm;
     TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV1_gc;
@@ -13,7 +13,9 @@ void pwm_pwm_init(){
     TCA0.SINGLE.CTRLA |= TCA_SINGLE_ENABLE_bm;
 }
 
-void brightness_adjust(uint16_t input){
+// method to adjust the brightness of the display
+void brightness_adjust(uint8_t input){
+    TCA0.SINGLE.PER = 255;
     TCA0.SINGLE.CMP1 = input;
 }
 
