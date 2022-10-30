@@ -44,13 +44,17 @@ void adc_init(void){
 
 // method to initialise the buzzer
 void buzzer_init(void){
-    sound_duty_cycle_adjust(0);
+    buzzer_off();
     buzz_init();
 }
 
 // method to adjust the noise of the buzzer
 void adjust_buzzer(uint8_t value){
     buzzer_frequency_finder(value);
+}
+
+void buzzer_off(){
+    set_buzzer_0();
 }
 
 // method to initialise the pwm

@@ -10,6 +10,8 @@ void adc_init();
 void buzzer_init();
 //method to adjust the buzzer tone
 void adjust_buzzer(uint8_t value);
+//method to turn the buzzer off
+void buzzer_off();
 
 void display_init();                            // Initialise display
 void display_hex(uint8_t digit);                // Display uint8 as hex digits

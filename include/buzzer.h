@@ -6,3 +6,5 @@ void buzz_init();
 void sound_duty_cycle_adjust(uint32_t input);
 // method to adjust the frequency
 void buzzer_frequency_finder(uint8_t value);
+//method to turn the buzzer off
+void set_buzzer_0();

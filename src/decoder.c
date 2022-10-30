@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "io.h"
 
+volatile uint32_t STATE_LFSR;
 
 //methods to decode and descramble from base64
 uint8_t lsbyte(uint32_t);
@@ -43,10 +44,10 @@ void decode(uint8_t* ENCODED, uint8_t* DECRYPTED){
 
 // method to descramble data from the decoded base 64
 void descamble(uint8_t* DECRYPTED, uint8_t* RESULT){
-    uint32_t STATE_LFSR = 0x11244682;
     uint32_t MASK = 0xB4BCD35C;
+    
 
-    uint8_t BIT;
+    uint8_t BIT = 0;
 
     for (uint32_t i = 0; i < 3; i++)
     {
@@ -62,8 +63,8 @@ void descamble(uint8_t* DECRYPTED, uint8_t* RESULT){
 
 // method to get the least significant byte
 uint8_t lsbyte(uint32_t bytes){
-    bytes <<= 3;
-    bytes >>= 3;
+    bytes <<= 24;
+    bytes >>= 24;
     return bytes;
 }
 
@@ -85,7 +86,7 @@ uint8_t DecodeToBinary(uint8_t byte){
     }else if (byte == '+'){
         number = 62;
     }else if(byte == '/'){
-        number = 63;
+        number =  63;
     }
     return number;
 }

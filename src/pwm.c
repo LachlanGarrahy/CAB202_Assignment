@@ -15,7 +15,6 @@ void pwm_pwm_init(){
 
 // method to adjust the brightness of the display
 void brightness_adjust(uint8_t input){
-    TCA0.SINGLE.PER = 255;
-    TCA0.SINGLE.CMP1 = input;
+    TCA0.SINGLE.CMP1BUF = input;
 }
 

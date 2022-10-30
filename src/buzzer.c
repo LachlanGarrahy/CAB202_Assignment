@@ -35,22 +35,33 @@ void buzz_init(){
     cli(); // Disable interrupts globally
     TCA0.SINGLE.INTCTRL = TCA_SINGLE_CMP0_bm;
     TCA0.SINGLE.CTRLB = TCA_SPLIT_LCMP0_bm;
-    TCA0.SINGLE.CMP0 = 1666;
+    TCA0.SINGLE.CMP0 = 3333;
     sei(); // Enable interrupts globally
+}
+
+// method to turn the buzzer off
+void set_buzzer_0(){
+
+    TCA0.SINGLE.PERBUF = 255;
+    TCA0.SINGLE.CMP0BUF = 3333;
 }
 
 // method to adjust the period and CMP0
 void sound_duty_cycle_adjust(uint32_t input){
 
-    TCA0.SINGLE.PER = input;
+    TCA0.SINGLE.PERBUF = input;
 
-    TCA0.SINGLE.CMP0 = input>>1;
+    TCA0.SINGLE.CMP0BUF = input>>1;
 }
 
 // method to find the note and run the function to adjust the noise
 void buzzer_frequency_finder(uint8_t value){
 
-    sound_duty_cycle_adjust(find_note(value));
+    // sound_duty_cycle_adjust(find_note(value));
+
+    uint32_t octave = value >> 4;
+    uint32_t note = value & 0b0001111;
+    sound_duty_cycle_adjust(55<<(octave+(note/12)-1));
 
 }
 

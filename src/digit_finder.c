@@ -1,6 +1,26 @@
 #include <stdio.h>
 #include "io.h"
 
+// variables to hold values for the display
+#define DISP_0 0x08
+#define DISP_1 0x6B
+#define DISP_2 0x44
+#define DISP_3 0x41
+#define DISP_4 0x23
+#define DISP_5 0x11
+#define DISP_6 0x10
+#define DISP_7 0x4B
+#define DISP_8 0x00
+#define DISP_9 0x01
+#define DISP_A 0x02
+#define DISP_B 0x30
+#define DISP_C 0x1C
+#define DISP_D 0x60
+#define DISP_E 0x14
+#define DISP_F 0x16
+#define DISP_DASH 0x77
+#define DISP_BLANK 0x7F
+
 uint8_t find_hex_digit(uint8_t);
 
 // method to call the display function with the values parsed from display hex
@@ -22,36 +42,36 @@ void display_hex_finder(uint8_t digit){
 // method to return the value to be parsed to the display method
 uint8_t find_hex_digit(uint8_t digit){
     if (digit == 0){
-        return 0b00001000;
+        return DISP_0;
     }else if (digit == 1){
-        return 0b01101011;
+        return DISP_1;
     }else if (digit == 2){
-        return 0b01000100;
+        return DISP_2;
     }else if (digit == 3){
-        return 0b01000001;
+        return DISP_3;
     }else if (digit == 4){
-        return 0b00100011;
+        return DISP_4;
     }else if (digit == 5){
-        return 0b00010001;
+        return DISP_5;
     }else if (digit == 6){
-        return 0b00010000;
+        return DISP_6;
     }else if (digit == 7){
-        return 0b01001011;
+        return DISP_7;
     }else if (digit == 8){
-        return 0b00000000;
+        return DISP_8;
     }else if (digit == 9){
-        return 0b00000011;
+        return DISP_9;
     }else if (digit == 10){
-        return 0b00000010;
+        return DISP_A;
     }else if (digit == 11){
-        return 0b00110000;
+        return DISP_B;
     }else if (digit == 12){
-        return 0b00011100;
+        return DISP_C;
     }else if (digit == 13){
-        return 0b01100000;
+        return DISP_D;
     }else if (digit == 14){
-        return 0b00010100;
+        return DISP_E;
     }else{
-        return 0b00010110;
+        return DISP_F;
     }
 }
